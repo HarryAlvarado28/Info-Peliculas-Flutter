@@ -8,8 +8,9 @@ class Peliculas {
     if(jsonList == null) return;
 
     for (var item in jsonList ) {
-      final pelicula = new Peliculas.fromJsonList(item);
-      item.add(pelicula);
+      final pelicula = new Pelicula.fromJsonMap(item);
+
+      items.add(pelicula);
     }
   }
 }
@@ -62,6 +63,14 @@ class Pelicula {
     adult               = json['adult'];
     overview            = json['overview'];
     releaseDate         = json['release_date'];
+  }
+
+  getPosterImg(){
+    if (posterPath == null) {
+      return 'https://likesreales.com.mx/wp-content/uploads/2014/07/trophy.png';
+    } else {
+      return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
   }
 }
 
