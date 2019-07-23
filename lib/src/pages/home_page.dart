@@ -77,7 +77,7 @@ class HomePage extends StatelessWidget {
               // existe información o no.
               // snapshot.data?.forEach((p)=> print('Titlulo: ${p.title}'));
               if (snapshot.hasData ){
-                return MovieHorizontal(peliculas: snapshot.data,);
+                return MovieHorizontal(peliculas: snapshot.data);
               } else {
                 return Center(child: CircularProgressIndicator());
               } 
