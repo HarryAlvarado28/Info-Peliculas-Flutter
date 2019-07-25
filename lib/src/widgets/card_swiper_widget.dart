@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:peliculas/src/models/pelicula_model.dart';
 
-
 class CardSwiper extends StatelessWidget {
 
   final List<Pelicula> peliculas;
@@ -16,7 +15,6 @@ class CardSwiper extends StatelessWidget {
 
     final _screenSize = MediaQuery.of(context).size;
     
-
     return Container(
       padding: EdgeInsets.only(top:10.0),
       child: Swiper(

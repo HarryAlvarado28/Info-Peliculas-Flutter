@@ -26,11 +26,10 @@ class MovieHorizontal extends StatelessWidget {
     });
 
     return Container(
-      height: _screenSize.height * 0.3,
+      height: _screenSize.height * 0.25,
       child: PageView.builder(
         pageSnapping: false,
         controller: _pageController,
-        // children: _targetas(context),
         itemCount: peliculas.length,
         itemBuilder: (context, i) {
           return _targeta(context, peliculas[i]);
@@ -42,6 +41,7 @@ class MovieHorizontal extends StatelessWidget {
   Widget _targeta(BuildContext context, Pelicula pelicula){
 
     pelicula.uniqueId = '${pelicula.id}-poster';
+    final _screenSize = MediaQuery.of(context).size;
 
     final targeta = Container(
         margin: EdgeInsets.only(right: 15.0),
@@ -55,7 +55,8 @@ class MovieHorizontal extends StatelessWidget {
                   image: NetworkImage(pelicula.getPosterImg()),
                   placeholder: AssetImage('assets/img/no-image.jpg'),
                   fit: BoxFit.cover,
-                  height: 160.0,
+                  // height: 160.0,
+                  height: _screenSize.height * 0.20,
                 ),
               ),
             ),
@@ -78,12 +79,5 @@ class MovieHorizontal extends StatelessWidget {
     );
 
   }
-
-  // List<Widget> _targetas(BuildContext context){
-  //   return peliculas.map((pelicula) {
-      
-  //   }).toList();
-  // }
-
 
 }
