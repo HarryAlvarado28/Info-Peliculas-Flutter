@@ -72,5 +72,12 @@ class Pelicula {
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
     }
   }
+  getBackgroundImg(){
+    if (posterPath == null) {
+      return 'https://likesreales.com.mx/wp-content/uploads/2014/07/trophy.png';
+    } else {
+      return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
+  }
 }
 
