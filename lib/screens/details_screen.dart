@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:info_peliculas/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
   // const name({Key? key}) : super(key: key);
@@ -12,12 +13,15 @@ class DetailsScreen extends StatelessWidget {
         body: CustomScrollView(
       slivers: [
         _CustomAppBar(),
-        SliverList(delegate: SliverChildListDelegate([_PosterAndTitle()]))
-        // Container(
-        //   child: Center(
-        //     child: Text('$movie'),
-        //   ),
-        // )
+        SliverList(
+            delegate: SliverChildListDelegate([
+          _PosterAndTitle(),
+          _Overview(),
+          _Overview(),
+          _Overview(),
+          _Overview(),
+          CastingCards()
+        ]))
       ],
     ));
   }
@@ -40,6 +44,7 @@ class _CustomAppBar extends StatelessWidget {
               width: double.infinity,
               alignment: Alignment.bottomCenter,
               color: Colors.black12,
+              padding: EdgeInsets.only(bottom: 10),
               child: Text('movie.title', style: TextStyle(fontSize: 16))),
           background: FadeInImage(
             placeholder: AssetImage('assets/loading.gif'),
@@ -94,6 +99,22 @@ class _PosterAndTitle extends StatelessWidget {
             )
           ])
         ],
+      ),
+    );
+  }
+}
+
+class _Overview extends StatelessWidget {
+  const _Overview({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Text(
+        'Veniam ipsum labore exercitation nisi est voluptate amet quis. Id proident laborum mollit Lorem anim do mollit minim duis magna laboris. Aliquip officia aliqua proident aliqua qui officia Lorem et. Exercitation anim magna aliquip pariatur fugiat nisi sint ex velit. Duis dolor dolor occaecat eu amet esse. Nostrud nostrud cillum commodo amet consectetur anim magna aute commodo ullamco aliquip proident.',
+        textAlign: TextAlign.justify,
+        style: Theme.of(context).textTheme.subtitle1,
       ),
     );
   }
