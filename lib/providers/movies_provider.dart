@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -12,6 +10,7 @@ class MoviesProvider extends ChangeNotifier {
 
   List<Movie> onDisplayMovies = [];
   List<Movie> popularMovies = [];
+  int _popularPage = 0;
 
   MoviesProvider() {
     print('MoviesProvider inicializando');
@@ -19,40 +18,28 @@ class MoviesProvider extends ChangeNotifier {
     this.getPopularMovies();
   }
 
-  getOnDisplayMovies() async {
-    print('getOnDisplayMovies');
-    // This example uses the Google Books API to search for books about http.
-    // https://developers.google.com/books/docs/overview
+  Future<String> _getJsonData(String endpoint, [int page = 1]) async {
     var url = Uri.https(
       _baseUrl,
-      '3/movie/now_playing',
-      {'api_key': _apiKey, 'language': _language, 'page': '1'},
+      endpoint,
+      {'api_key': _apiKey, 'language': _language, 'page': '$page'},
     );
-
-    // Await the http get response, then decode the json-formatted response.
     final response = await http.get(url);
-    final nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
-    // print(nowPlayingResponse.results[1].title);
+    return response.body;
+  }
+
+  getOnDisplayMovies() async {
+    final jsonData = await this._getJsonData('3/movie/now_playing');
+    final nowPlayingResponse = NowPlayingResponse.fromJson(jsonData);
     onDisplayMovies = nowPlayingResponse.results;
     notifyListeners();
   }
 
   getPopularMovies() async {
-    print('getOnDisplayMovies');
-    // This example uses the Google Books API to search for books about http.
-    // https://developers.google.com/books/docs/overview
-    var url = Uri.https(
-      _baseUrl,
-      '3/movie/popular',
-      {'api_key': _apiKey, 'language': _language, 'page': '1'},
-    );
-
-    // Await the http get response, then decode the json-formatted response.
-    final response = await http.get(url);
-    final popularResponse = PopularResponse.fromJson(response.body);
-    // print(nowPlayingResponse.results[1].title);
+    _popularPage++;
+    final jsonData = await this._getJsonData('3/movie/popular', _popularPage);
+    final popularResponse = PopularResponse.fromJson(jsonData);
     popularMovies = [...popularMovies, ...popularResponse.results];
-    // print(popularMovies[0]);
     notifyListeners();
   }
 }
