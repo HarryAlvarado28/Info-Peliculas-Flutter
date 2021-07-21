@@ -11,10 +11,12 @@ class MoviesProvider extends ChangeNotifier {
   String _language = 'es-ES';
 
   List<Movie> onDisplayMovies = [];
+  List<Movie> popularMovies = [];
 
   MoviesProvider() {
     print('MoviesProvider inicializando');
     this.getOnDisplayMovies();
+    this.getPopularMovies();
   }
 
   getOnDisplayMovies() async {
@@ -32,6 +34,25 @@ class MoviesProvider extends ChangeNotifier {
     final nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
     // print(nowPlayingResponse.results[1].title);
     onDisplayMovies = nowPlayingResponse.results;
+    notifyListeners();
+  }
+
+  getPopularMovies() async {
+    print('getOnDisplayMovies');
+    // This example uses the Google Books API to search for books about http.
+    // https://developers.google.com/books/docs/overview
+    var url = Uri.https(
+      _baseUrl,
+      '3/movie/popular',
+      {'api_key': _apiKey, 'language': _language, 'page': '1'},
+    );
+
+    // Await the http get response, then decode the json-formatted response.
+    final response = await http.get(url);
+    final popularResponse = PopularResponse.fromJson(response.body);
+    // print(nowPlayingResponse.results[1].title);
+    popularMovies = [...popularMovies, ...popularResponse.results];
+    // print(popularMovies[0]);
     notifyListeners();
   }
 }
