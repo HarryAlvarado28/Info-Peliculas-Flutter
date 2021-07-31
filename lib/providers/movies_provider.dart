@@ -8,7 +8,7 @@ import 'package:info_peliculas/models/models.dart';
 import 'package:info_peliculas/models/search_response.dart';
 
 class MoviesProvider extends ChangeNotifier {
-  String _apiKey = '4b2365e9296c3b96988d2550360506be';
+  String _apiKey = '';
   String _baseUrl = 'api.themoviedb.org';
   String _language = 'es-ES';
 
