@@ -22,3 +22,7 @@ Este es un proyecto de clase, tomado del curso [Flutter iOS-Android](https://www
 # Perfil TMDB 
 
 https://www.themoviedb.org/u/HarryAlvarado28 
+
+# La applicación
+
+![La app](/img-app.jpeg)
